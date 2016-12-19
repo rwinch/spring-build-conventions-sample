@@ -1,0 +1,39 @@
+apply plugin: 'java'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	testCompile 'junit:junit:4.12'
+	testCompile 'org.assertj:assertj-core:3.6.1'
+}
+
+task integrationTest() << {
+	println "integration test start"
+	for(int i=0;i<15;i++) {
+		Thread.sleep(1000L)
+		println "itest $i"
+	}
+	println "Integration Test Done"
+}
+
+task stageDocs() << {
+	println "stage docs start"
+	for(int i=0;i<15;i++) {
+		Thread.sleep(1000L)
+		println "stage docs $i"
+	}
+	println "stage docs Done"
+}
+
+task deploy() << {
+	println "deploy start"
+	for(int i=0;i<15;i++) {
+		Thread.sleep(1000L)
+		println "deploy $i"
+	}
+	println "deploy Done"
+}
+
+check.dependsOn integrationTest
