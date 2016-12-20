@@ -1,26 +1,28 @@
-node {
-    stage('Checkout') {
-        checkout scm
-    }
+stage('Build') {
+	parallel test: {
+		node {
+			checkout scm
+			sh './gradlew test'
+		}
+	},
 
-    stage('Build') {
-        sh './gradlew clean assemble'
-    }
+	itest: {
+		node {
+			checkout scm
+			sh './gradlew iTest'
+		}
+	},
 
-    stage('Test') {
-        sh './gradlew test'
-        junit 'build/*-results/*/*.xml'
-    }
+	stageDocs: {
+		node {
+			checkout scm
+			sh './gradlew stageDocs'
+		}
+	}
+}
 
-    stage('Integration Test') {
-        sh './gradlew iTest'
-    }
-
-    stage('Stage Docs') {
-        sh './gradlew stageDocs'
-    }
-
-    stage('Deploy') {
-        sh './gradlew deploy'
-    }
+stage('Deploy') {
+	if (currentBuild.result == 'SUCCESS') {
+		sh './gradlew deploy'
+	}
 }
