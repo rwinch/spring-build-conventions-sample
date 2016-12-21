@@ -2,6 +2,9 @@ stage('Build') {
 	parallel test: {
 		stage('Test') {
 			node {
+				withCredentials([string(credentialsId: 'key', variable: 'V')]) {
+					sh "echo $V"
+				}
 				checkout scm
 				try {
 					sh './gradlew clean test'
