@@ -11,7 +11,7 @@ dependencies {
 
 task integrationTest() << {
 	println "integration test start"
-	for(int i=0;i<60;i++) {
+	for(int i=0;i<5;i++) {
 		Thread.sleep(1000L)
 		def d = new Date()
 		println "itest $i - $d"
@@ -21,7 +21,7 @@ task integrationTest() << {
 
 task stageDocs() << {
 	println "stage docs start"
-	for(int i=0;i<60;i++) {
+	for(int i=0;i<5;i++) {
 		Thread.sleep(1000L)
 		def d = new Date()
 		println "stage docs $i - $d"
@@ -31,7 +31,7 @@ task stageDocs() << {
 
 task deploy() << {
 	println "deploy start"
-	for(int i=0;i<15;i++) {
+	for(int i=0;i<5;i++) {
 		Thread.sleep(1000L)
 		println "deploy $i"
 	}
