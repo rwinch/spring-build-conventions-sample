@@ -1,4 +1,7 @@
 
+println "hello env"
+println System.getenv('DOCS_PRIVATE_KEY')
+println "decoded.."
 println System.getenv('DOCS_PRIVATE_KEY')?.decodeBase64()
 
 apply plugin: 'java'
