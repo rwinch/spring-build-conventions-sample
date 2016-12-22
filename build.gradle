@@ -17,7 +17,7 @@ remotes {
 	localhost {
 		role 'local'
 		host = 'localhost'
-		identity = ext['SECRET_KEY']
+		identity = project.ext['SECRET_KEY']
 	}
 }
 
