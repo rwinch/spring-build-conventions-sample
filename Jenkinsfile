@@ -2,8 +2,8 @@ stage('Build') {
 	parallel test: {
 		stage('Test') {
 			node {
-				withCredentials([string(credentialsId: 'key', variable: 'V')]) {
-					sh "echo $V"
+				withCredentials([string(credentialsId: 'key', variable: 'SECRET_V')]) {
+					sh "echo $SECRET_V"
 				}
 				checkout scm
 				try {
