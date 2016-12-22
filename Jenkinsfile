@@ -5,7 +5,7 @@ stage('Build') {
 				checkout scm
 				try {
 					withCredentials([string(credentialsId: 'key', variable: 'DOCS_PRIVATE_KEY')]) {
-						sh './gradlew clean test'
+						sh './gradlew clean test --no-daemon'
 					}
 				} finally {
 					junit '**/build/*-results/*/*.xml'
@@ -18,7 +18,7 @@ stage('Build') {
 		stage('iTest') {
 			node {
 				checkout scm
-				sh './gradlew iTest'
+				sh './gradlew iTest --no-daemon'
 			}
 		}
 	},
@@ -27,7 +27,7 @@ stage('Build') {
 		stage('stage docs') {
 			node {
 				checkout scm
-				sh './gradlew stageDocs'
+				sh './gradlew stageDocs --no-daemon'
 			}
 		}
 	}
@@ -35,6 +35,6 @@ stage('Build') {
 
 stage('Deploy') {
 	if (currentBuild.result == 'SUCCESS') {
-		sh './gradlew deploy'
+		sh './gradlew deploy --no-daemon'
 	}
 }
