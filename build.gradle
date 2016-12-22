@@ -1,8 +1,8 @@
+plugins {
+	id 'org.hidetake.ssh' version '2.7.0'
+}
 
-println "hello env"
-println System.getenv('DOCS_PRIVATE_KEY')
-println "decoded.."
-println System.getenv('DOCS_PRIVATE_KEY')?.decodeBase64()
+println ext['DOCS_PRIVATE_KEY']
 
 apply plugin: 'java'
 

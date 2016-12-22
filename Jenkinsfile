@@ -4,9 +4,9 @@ stage('Build') {
 			node {
 				checkout scm
 				try {
-					withCredentials([string(credentialsId: 'key', variable: 'DOCS_PRIVATE_KEY')]) {
-						sh "echo $DOCS_PRIVATE_KEY"
-						sh './gradlew clean test --no-daemon'
+					withCredentials([file(credentialsId: 'private-key', variable: 'SECRET_KEY')]) {
+						sh "echo $SECRET_KEY"
+ 						sh './gradlew clean test -PDOCS_PRIVATE_KEY=$SECRET_KEY --no-daemon'
 					}
 				} finally {
 					junit '**/build/*-results/*/*.xml'
