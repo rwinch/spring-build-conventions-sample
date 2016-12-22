@@ -2,8 +2,6 @@ plugins {
 	id 'org.hidetake.ssh' version '2.7.0'
 }
 
-println ext['DOCS_PRIVATE_KEY']
-
 apply plugin: 'java'
 
 repositories {
@@ -14,6 +12,15 @@ dependencies {
 	testCompile 'junit:junit:4.12'
 	testCompile 'org.assertj:assertj-core:3.6.1'
 }
+
+remotes {
+	localhost {
+		role 'local'
+		host = 'localhost'
+		identity = $SECRET_KEY
+	}
+}
+
 
 task integrationTest() << {
 	println "integration test start"
@@ -36,12 +43,13 @@ task stageDocs() << {
 }
 
 task deploy() << {
-	println "deploy start"
-	for(int i=0;i<5;i++) {
-		Thread.sleep(1000L)
-		println "deploy $i"
+	ssh.run {
+		session(remotes.localhost) {
+			// Execute a command
+			def result = execute 'echo "hi" >> /tmp/gradle'
+			println result
+		}
 	}
-	println "deploy Done"
 }
 
 check.dependsOn integrationTest
