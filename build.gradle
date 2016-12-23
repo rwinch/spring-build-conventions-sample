@@ -13,11 +13,17 @@ dependencies {
 	testCompile 'org.assertj:assertj-core:3.6.1'
 }
 
+ssh.settings {
+	knownHosts = allowAnyHosts
+}
+
 remotes {
 	localhost {
 		role 'local'
 		host = 'localhost'
-		identity = project.ext['SECRET_KEY']
+		user = ext['SSH_USERNAME']
+		identity = ext['SSH_KEY']
+		passphrase = ext['SSH_PASSPHRASE']
 	}
 }
 
@@ -45,9 +51,7 @@ task stageDocs() << {
 task deploy() << {
 	ssh.run {
 		session(remotes.localhost) {
-			// Execute a command
-			def result = execute 'echo "hi" >> /tmp/gradle'
-			println result
+			put from: files('settings.gradle'), into: '/tmp/'
 		}
 	}
 }
