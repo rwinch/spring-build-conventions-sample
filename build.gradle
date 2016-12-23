@@ -21,9 +21,9 @@ remotes {
 	localhost {
 		role 'local'
 		host = 'localhost'
-		user = ext['SSH_USERNAME']
-		identity = ext['SSH_KEY']
-		passphrase = ext['SSH_PASSPHRASE']
+		user = project.ext['SSH_USERNAME']
+		identity = project.ext['SSH_KEY']
+		passphrase = project.ext['SSH_PASSPHRASE']
 	}
 }
 
