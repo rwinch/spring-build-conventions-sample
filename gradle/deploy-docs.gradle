@@ -1,0 +1,23 @@
+
+
+ssh.settings {
+	knownHosts = allowAnyHosts
+}
+
+remotes {
+	localhost {
+		role 'local'
+		host = 'localhost'
+		user = project.ext['SSH_USERNAME']
+		identity = file(project.ext['SSH_KEY'])
+		passphrase = project.ext['SSH_PASSPHRASE']
+	}
+}
+
+task deploy() << {
+	ssh.run {
+		session(remotes.localhost) {
+			put from: files('settings.gradle'), into: '/tmp/'
+		}
+	}
+}
