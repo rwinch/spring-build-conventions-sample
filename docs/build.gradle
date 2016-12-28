@@ -4,6 +4,7 @@ plugins {
 
 apply plugin: 'java'
 apply plugin: 'org.asciidoctor.convert'
+apply from: "$rootDir/gradle/deploy-docs.gradle"
 
 version = '1.0.0-SNAPSHOT'
 
@@ -24,4 +25,9 @@ asciidoctor {
         'idprefix': '',
         'idseparator': '-',
         'docinfo1': ''
+}
+
+task docsZip(type: Zip) {
+	from asciidoctor
+	into 'docs'
 }
