@@ -3,6 +3,7 @@ plugins {
 }
 
 apply plugin: 'java'
+apply from: "$rootDir/gradle/deploy-docs.gradle"
 
 repositories {
 	mavenCentral()
@@ -11,20 +12,6 @@ repositories {
 dependencies {
 	testCompile 'junit:junit:4.12'
 	testCompile 'org.assertj:assertj-core:3.6.1'
-}
-
-ssh.settings {
-	knownHosts = allowAnyHosts
-}
-
-remotes {
-	localhost {
-		role 'local'
-		host = 'localhost'
-		user = project.ext['SSH_USERNAME']
-		identity = file(project.ext['SSH_KEY'])
-		passphrase = project.ext['SSH_PASSPHRASE']
-	}
 }
 
 task integrationTest() << {
@@ -45,14 +32,6 @@ task stageDocs() << {
 		println "stage docs $i - $d"
 	}
 	println "stage docs Done"
-}
-
-task deploy() << {
-	ssh.run {
-		session(remotes.localhost) {
-			put from: files('settings.gradle'), into: '/tmp/'
-		}
-	}
 }
 
 check.dependsOn integrationTest
