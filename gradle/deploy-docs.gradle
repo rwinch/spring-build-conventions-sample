@@ -8,16 +8,30 @@ remotes {
 	localhost {
 		role 'local'
 		host = 'localhost'
-		user = project.ext['SSH_USERNAME']
-		identity = file(project.ext['SSH_KEY'])
-		passphrase = project.ext['SSH_PASSPHRASE']
 	}
 }
 
-task deploy() << {
-	ssh.run {
-		session(remotes.localhost) {
-			put from: files('settings.gradle'), into: '/tmp/'
+task prepareDeploy(dependsOn: 'docsZip') {
+	doFirst {
+		deploy.inputs.files project.tasks.docsZip.outputs
+		project.remotes {
+			localhost {
+				user = project.ext['SSH_USERNAME']
+				identity = file(project.ext['SSH_KEY'])
+				passphrase = project.ext['SSH_PASSPHRASE']
+			}
+		}
+	}
+}
+
+task deploy(dependsOn: prepareDeploy) {
+	doFirst {
+		ssh.run {
+			session(remotes.localhost) {
+				project.tasks.docsZip.outputs.each { o ->
+					put from: o.files, into: '/tmp/'
+				}
+			}
 		}
 	}
 }

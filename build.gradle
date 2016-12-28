@@ -3,7 +3,6 @@ plugins {
 }
 
 apply plugin: 'java'
-apply from: "$rootDir/gradle/deploy-docs.gradle"
 
 repositories {
 	mavenCentral()
