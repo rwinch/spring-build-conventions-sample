@@ -7,10 +7,6 @@ version = "1.0.0.BUILD-SNAPSHOT"
 
 ext.snapshotBuild = version?.endsWith("-SNAPSHOT")
 
-signing {
-	sign configurations.archives
-}
-
 install {
 	repositories.mavenInstaller {
 		customizePom(pom, project)
