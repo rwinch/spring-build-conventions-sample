@@ -1,26 +1,11 @@
 apply plugin: 'java'
-apply plugin: 'maven'
-apply plugin: 'signing'
+apply plugin: 'io.spring.convention.maven'
 
 group = "org.springframework.build"
 archivesBaseName = "build-test"
 version = "1.0.0.BUILD-SNAPSHOT"
 
 ext.snapshotBuild = version?.endsWith("-SNAPSHOT")
-
-task javadocJar(type: Jar) {
-	classifier = 'javadoc'
-	from javadoc
-}
-
-task sourcesJar(type: Jar) {
-	classifier = 'sources'
-	from sourceSets.main.allSource
-}
-
-artifacts {
-	archives javadocJar, sourcesJar
-}
 
 signing {
 	sign configurations.archives

@@ -1,3 +1,9 @@
+buildscript {
+	dependencies {
+		classpath 'io.spring.gradle:spring-convention-plugins:1.0-SNAPSHOT'
+	}
+}
+
 plugins {
 	id 'org.hidetake.ssh' version '2.7.0'
 }
