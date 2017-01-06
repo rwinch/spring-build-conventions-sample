@@ -1,15 +1,25 @@
 apply plugin: 'java'
 apply plugin: 'io.spring.convention.maven'
 
-group = "org.springframework.build"
-archivesBaseName = "build-test"
+group = "org.springframework.build.test"
 version = "1.0.0.BUILD-SNAPSHOT"
 
 ext.snapshotBuild = version?.endsWith("-SNAPSHOT")
 
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	compile 'org.springframework:spring-web:4.3.0.RELEASE'
+	compile 'org.springframework:spring-core:4.3.0.RELEASE'
+	testCompile 'junit:junit:4.12'
+}
+
 install {
 	repositories.mavenInstaller {
-		customizePom(pom, project)
+		pom.whenConfigured { p ->
+		}
 	}
 }
 
@@ -25,6 +35,7 @@ def customizePom(pom, gradleProject) {
 		}
 	}
 	def isWar = project.hasProperty('war')
+	println "   om.project= " + pom.project
 	pom.project {
 		name = gradleProject.name
 		if(isWar) {
@@ -131,7 +142,7 @@ uploadArchives {
 				authentication(userName: ossrhUsername, password: ossrhPassword)
 			}
 
-			customizePom(pom, project)
+			//customizePom(pom, project)
 		}
 	}
 }
