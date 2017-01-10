@@ -35,7 +35,6 @@ def customizePom(pom, gradleProject) {
 		}
 	}
 	def isWar = project.hasProperty('war')
-	println "   om.project= " + pom.project
 	pom.project {
 		name = gradleProject.name
 		if(isWar) {
@@ -127,22 +126,16 @@ task generatePom {
 }
 
 
-uploadArchives {
-	repositories {
-		mavenDeployer {
-			beforeDeployment { MavenDeployment deployment ->
-				signing.signPom(deployment)
-			}
-
-			repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
-				authentication(userName: ossrhUsername, password: ossrhPassword)
-			}
-
-			snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
-				authentication(userName: ossrhUsername, password: ossrhPassword)
-			}
-
-			//customizePom(pom, project)
-		}
-	}
-}
+//uploadArchives {
+//	repositories {
+//		mavenDeployer {
+//			repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+//				authentication(userName: ossrhUsername, password: ossrhPassword)
+//			}
+//
+//			snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+//				authentication(userName: ossrhUsername, password: ossrhPassword)
+//			}
+//		}
+//	}
+//}
