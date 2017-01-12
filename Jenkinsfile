@@ -1,11 +1,9 @@
-
-
-stage('Deploy') {
+stage('OSSRH Deploy') {
 	node {
 		checkout scm
-		withCredentials([file(credentialsId: 'ssh_id_rsa', variable: 'SSH_KEY')]) {
-			withCredentials([usernamePassword(credentialsId: 'ssh_username_passphrase', passwordVariable: 'SSH_PASSPHRASE', usernameVariable: 'SSH_USERNAME')]) {
-				sh "./gradlew deploy -PSSH_KEY=$SSH_KEY -PSSH_USERNAME=$SSH_USERNAME -PSSH_PASSPHRASE=$SSH_PASSPHRASE --no-daemon"
+		withCredentials([file(credentialsId: 'spring-signing-secring.gpg', variable: 'SIGNING_KEYRING_FILE')]) {
+			withCredentials([string(credentialsId: 'spring-gpg-passphrase', variable: 'SIGNING_PASSWORD')]) {
+				sh "./gradlew uploadArtifacts -Psigning.secretKeyRingFile=$SIGNING_KEYRING_FILE -Psigning.keyId=$SPRING_SIGNING_KEYID -Psigning.password=$SIGNING_PASSWORD --no-daemon"
 			}
 		}
 	}
