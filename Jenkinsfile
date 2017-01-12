@@ -1,6 +1,8 @@
 stage('OSSRH Deploy') {
 	node {
 		checkout scm
-		sh "echo hi"
+		withCredentials([string(credentialsId: 'spring-gpg-passphrase', variable: 'SIGNING_PASSWORD')]) {
+			sh "echo hi"
+		}
 	}
 }
