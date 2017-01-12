@@ -3,7 +3,7 @@ stage('OSSRH Deploy') {
 		checkout scm
 		withCredentials([file(credentialsId: 'spring-signing-secring.gpg', variable: 'SIGNING_KEYRING_FILE')]) {
 			withCredentials([string(credentialsId: 'spring-gpg-passphrase', variable: 'SIGNING_PASSWORD')]) {
-				sh "./gradlew uploadArtifacts -Psigning.secretKeyRingFile=$SIGNING_KEYRING_FILE -Psigning.keyId=93185045 -Psigning.password=$SIGNING_PASSWORD --no-daemon"
+				sh "echo hi"
 			}
 		}
 	}
