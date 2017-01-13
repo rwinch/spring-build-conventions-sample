@@ -11,20 +11,22 @@ remotes {
 	}
 }
 
-task prepareDeploy(dependsOn: 'docsZip') {
+task prepareDeployDocs(dependsOn: 'docsZip') {
 	doFirst {
 		deploy.inputs.files project.tasks.docsZip.outputs
 		project.remotes {
 			localhost {
-				user = project.ext['SSH_USERNAME']
-				identity = file(project.ext['SSH_KEY'])
-				passphrase = project.ext['SSH_PASSPHRASE']
+				user = project.ext['deployDocsSshUsername']
+				identity = file(project.ext['deployDocsSshKeyPath'])
+				if(project.hasProperty('deployDocsSshPassphrase')) {
+					passphrase = project.ext['deployDocsSshPassphrase']
+				}
 			}
 		}
 	}
 }
 
-task deploy(dependsOn: prepareDeploy) {
+task deployDocs(dependsOn: prepareDeployDocs) {
 	doFirst {
 		ssh.run {
 			session(remotes.localhost) {

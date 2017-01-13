@@ -10,3 +10,12 @@ stage('OSSRH Deploy') {
 		}
 	}
 }
+
+stage('Deploy Docs') {
+	node {
+		checkout scm
+		withCredentials([file(credentialsId: 'docs.spring.io-jenkins_private_ssh_key', variable: 'DEPLOY_SSH_KEY')]) {
+			sh "./gradlew deploy -PdeployDocsSshKeyPath=$DEPLOY_SSH_KEY -PdeployDocsSshUsername=jenkins --no-daemon"
+		}
+	}
+}
