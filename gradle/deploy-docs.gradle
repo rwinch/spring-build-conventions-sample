@@ -5,7 +5,7 @@ ssh.settings {
 }
 
 remotes {
-	localhost {
+	docs {
 		role 'docs'
 		host = 'docs.af.pivotal.io'
 	}
@@ -15,7 +15,7 @@ task prepareDeployDocs(dependsOn: 'docsZip') {
 	doFirst {
 		deployDocs.inputs.files project.tasks.docsZip.outputs
 		project.remotes {
-			localhost {
+			docs {
 				user = project.ext['deployDocsSshUsername']
 				identity = file(project.ext['deployDocsSshKeyPath'])
 				if(project.hasProperty('deployDocsSshPassphrase')) {
@@ -29,7 +29,7 @@ task prepareDeployDocs(dependsOn: 'docsZip') {
 task deployDocs(dependsOn: prepareDeployDocs) {
 	doFirst {
 		ssh.run {
-			session(remotes.localhost) {
+			session(remotes.docs) {
 				def now = System.currentTimeMillis()
 				def name = rootProject.name
 				def version = rootProject.version
