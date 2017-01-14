@@ -13,7 +13,7 @@ remotes {
 
 task prepareDeployDocs(dependsOn: 'docsZip') {
 	doFirst {
-		deploy.inputs.files project.tasks.docsZip.outputs
+		deployDocs.inputs.files project.tasks.docsZip.outputs
 		project.remotes {
 			localhost {
 				user = project.ext['deployDocsSshUsername']
