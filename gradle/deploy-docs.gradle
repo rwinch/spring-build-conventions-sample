@@ -44,6 +44,7 @@ task deployDocs(dependsOn: prepareDeployDocs) {
 
 				def extractPath = "/var/www/domains/springsource.org/www/htdocs/autorepo/docs/${name}/${version}/"
 
+				execute "rm -rf $extractPath"
 				execute "mkdir -p $extractPath"
 				execute "mv $tempPath/docs/* $extractPath"
 			}
