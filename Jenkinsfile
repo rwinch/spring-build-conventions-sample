@@ -1,11 +1,14 @@
 stage('OSSRH Deploy') {
 	node {
-		sh "echo ossrh"
+		sh "echo hi"
 	}
 }
 
 stage('Deploy Docs') {
 	node {
-		sh "echo docs"
+		checkout scm
+		withCredentials([file(credentialsId: 'docs.spring.io-jenkins_private_ssh_key', variable: 'DEPLOY_SSH_KEY')]) {
+			sh "./gradlew deployDocs -PdeployDocsSshKeyPath=$DEPLOY_SSH_KEY -PdeployDocsSshUsername=$SPRING_DOCS_USERNAME --no-daemon --stacktrace"
+		}
 	}
 }
