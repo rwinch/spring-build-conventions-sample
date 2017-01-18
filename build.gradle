@@ -4,44 +4,20 @@ buildscript {
 	}
 	repositories {
 		maven { url 'https://repo.spring.io/libs-snapshot' }
+		maven { url 'https://repo.spring.io/plugins-release' }
 	}
 }
 
-plugins {
-	id 'org.hidetake.ssh' version '2.7.0'
-}
-
 apply plugin: 'java'
+apply plugin: 'io.spring.convention.schema'
 
 version = '1.0.0.BUILD-SNAPSHOT'
 
 repositories {
-	mavenCentral()
+	jcenter()
 }
 
 dependencies {
 	testCompile 'junit:junit:4.12'
 	testCompile 'org.assertj:assertj-core:3.6.1'
 }
-
-task integrationTest() << {
-	println "integration test start"
-	for(int i=0;i<5;i++) {
-		Thread.sleep(1000L)
-		def d = new Date()
-		println "itest $i - $d"
-	}
-	println "Integration Test Done"
-}
-
-task stageDocs() << {
-	println "stage docs start"
-	for(int i=0;i<5;i++) {
-		Thread.sleep(1000L)
-		def d = new Date()
-		println "stage docs $i - $d"
-	}
-	println "stage docs Done"
-}
-
-check.dependsOn integrationTest

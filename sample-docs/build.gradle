@@ -4,7 +4,9 @@ plugins {
 
 apply plugin: 'java'
 apply plugin: 'org.asciidoctor.convert'
-apply from: "$rootDir/gradle/deploy-docs.gradle"
+apply plugin: 'io.spring.convention.docs'
+apply plugin: 'io.spring.convention.javadocapi'
+
 
 version = '1.0.0-SNAPSHOT'
 
@@ -27,7 +29,12 @@ asciidoctor {
         'docinfo1': ''
 }
 
-task docsZip(type: Zip) {
-	from asciidoctor
+task docsZip(type: Zip, dependsOn: ['api']) {
+	from(asciidoctor.outputs) {
+		into 'reference'
+	}
+	from(api.outputs) {
+		into 'api'
+	}
 	into 'docs'
 }

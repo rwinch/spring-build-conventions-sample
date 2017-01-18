@@ -1,3 +1,4 @@
 rootProject.name = 'spring-gradle-build-conventions-sample'
+include ':sample-core'
 include ':sample-docs'
 include ':sample-api'
