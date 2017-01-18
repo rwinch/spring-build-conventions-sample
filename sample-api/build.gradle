@@ -3,8 +3,6 @@ apply plugin: 'io.spring.convention.spring-module'
 group = "org.springframework.build.test"
 version = "1.0.0.BUILD-SNAPSHOT"
 
-ext.snapshotBuild = version?.endsWith("-SNAPSHOT")
-
 repositories {
 	mavenCentral()
 }

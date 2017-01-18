@@ -7,9 +7,6 @@ apply plugin: 'org.asciidoctor.convert'
 apply plugin: 'io.spring.convention.docs'
 apply plugin: 'io.spring.convention.javadocapi'
 
-
-version = '1.0.0-SNAPSHOT'
-
 asciidoctorj {
     version = '1.5.4'
 }

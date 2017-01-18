@@ -7,17 +7,10 @@ buildscript {
 		maven { url 'https://repo.spring.io/plugins-release' }
 	}
 }
-
-apply plugin: 'java'
 apply plugin: 'io.spring.convention.schema'
 
-version = '1.0.0.BUILD-SNAPSHOT'
-ext.springIoVersion = 'Athens-SR2'
-repositories {
-	jcenter()
-}
+group = "org.springframework.build.test"
+version = "1.0.0.BUILD-SNAPSHOT"
 
-dependencies {
-	testCompile 'junit:junit:4.12'
-	testCompile 'org.assertj:assertj-core:3.6.1'
-}
+ext.springIoVersion = 'Athens-SR2'
+
