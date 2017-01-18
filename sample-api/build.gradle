@@ -10,8 +10,8 @@ repositories {
 }
 
 dependencies {
-	compile 'org.springframework:spring-web:4.3.0.RELEASE'
-	compile 'org.springframework:spring-core:4.3.0.RELEASE'
-	testCompile 'junit:junit:4.12'
+	compile 'org.springframework:spring-web'
+	compile 'org.springframework:spring-core'
+	testCompile 'junit:junit'
 }
 

@@ -12,7 +12,7 @@ apply plugin: 'java'
 apply plugin: 'io.spring.convention.schema'
 
 version = '1.0.0.BUILD-SNAPSHOT'
-
+ext.springIoVersion = 'Athens-SR2'
 repositories {
 	jcenter()
 }
