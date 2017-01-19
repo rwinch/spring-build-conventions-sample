@@ -17,6 +17,7 @@ projects.each { File buildFile ->
 	def project = findProject(":${projectPath}")
 	if(!'build.gradle'.equals(buildFile.name)) {
 		project.name = buildFile.name.replace('.gradle','')
+		project.buildFileName = buildFile.name
 	}
 	project.projectDir = buildFile.parentFile
 }
