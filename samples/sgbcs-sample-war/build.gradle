@@ -1,17 +1,3 @@
-buildscript {
-  repositories {
-    jcenter()
-  }
-
-  dependencies {
-    classpath 'org.akhikhl.gretty:gretty:+'
-  }
-}
-
-repositories {
-  jcenter()
-}
-
 apply plugin: 'io.spring.convention.spring-sample-war'
 
 repositories {
@@ -22,9 +8,4 @@ dependencies {
 	provided 'javax.servlet:javax.servlet-api'
 	testCompile 'commons-io:commons-io'
 	testCompile 'junit:junit'
-}
-
-gretty {
-	contextPath = '/'
-	integrationTestTask = 'integrationTest'
 }
