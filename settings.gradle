@@ -1,4 +1,22 @@
 rootProject.name = 'spring-gradle-build-conventions-sample'
-include ':sample-core'
-include ':sample-docs'
-include ':sample-api'
+
+
+FileTree projects = fileTree(rootDir) {
+	include '**/*.gradle'
+	exclude 'gradle', 'settings.gradle', 'buildSrc', '/build.gradle', '.*'
+}
+
+String rootDirPath = rootDir.absolutePath + File.separator
+projects.each { File buildFile ->
+	String buildFilePath = buildFile.parentFile.absolutePath
+
+	String projectPath = buildFilePath.replace(rootDirPath, '').replaceAll(File.separator, ':')
+
+	include projectPath
+
+	def project = findProject(":${projectPath}")
+	if(!'build.gradle'.equals(buildFile.name)) {
+		project.name = buildFile.name.replace('.gradle','')
+	}
+	project.projectDir = buildFile.parentFile
+}
