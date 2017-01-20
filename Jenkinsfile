@@ -1,4 +1,12 @@
-parallel ossrh: {
+parallel check: {
+	stage('Check') {
+		node {
+			checkout scm
+			sh "./gradlew check  --refresh-dependencies --no-daemon"
+		}
+	}
+},
+docs: ossrh: {
 	stage('OSSRH Deploy') {
 		node {
 			checkout scm
