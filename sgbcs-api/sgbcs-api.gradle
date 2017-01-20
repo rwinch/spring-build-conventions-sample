@@ -1,12 +1,5 @@
 apply plugin: 'io.spring.convention.spring-module'
 
-group = "org.springframework.build.test"
-version = "1.0.0.BUILD-SNAPSHOT"
-
-repositories {
-	mavenCentral()
-}
-
 dependencies {
 	compile 'org.springframework:spring-web'
 	compile 'org.springframework:spring-core'
