@@ -7,7 +7,7 @@ buildscript {
 		maven { url 'https://repo.spring.io/plugins-release' }
 	}
 }
-apply plugin: 'io.spring.convention.schema'
+apply plugin: 'io.spring.convention.root'
 
 group = "org.springframework.build.test"
 version = "1.0.0.BUILD-SNAPSHOT"
