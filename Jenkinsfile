@@ -6,7 +6,7 @@ parallel check: {
 		}
 	}
 },
-docs: ossrh: {
+ossrh: {
 	stage('OSSRH Deploy') {
 		node {
 			checkout scm
