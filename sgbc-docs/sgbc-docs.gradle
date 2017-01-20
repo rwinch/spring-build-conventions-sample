@@ -1,19 +1,11 @@
-plugins {
-    id 'org.asciidoctor.convert' version '1.5.3'
-}
-
 apply plugin: 'java'
-apply plugin: 'org.asciidoctor.convert'
 apply plugin: 'io.spring.convention.docs'
-apply plugin: 'io.spring.convention.javadocapi'
 
-asciidoctorj {
-    version = '1.5.4'
-}
+
 
 asciidoctor {
     attributes \
-        'build-gradle': file('build.gradle'),
+        'build-gradle': project.buildFile,
         'sourcedir': project.sourceSets.main.java.srcDirs[0],
         'endpoint-url': 'http://example.org',
         'source-highlighter': 'coderay',
@@ -26,12 +18,4 @@ asciidoctor {
         'docinfo1': ''
 }
 
-task docsZip(type: Zip, dependsOn: ['api']) {
-	from(asciidoctor.outputs) {
-		into 'reference'
-	}
-	from(api.outputs) {
-		into 'api'
-	}
-	into 'docs'
-}
+
