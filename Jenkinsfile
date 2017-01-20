@@ -6,6 +6,16 @@ parallel check: {
 		}
 	}
 },
+sonar: {
+	stage('Sonar') {
+		node {
+			checkout scm
+			withCredentials([string(credentialsId: 'spring-sonar.login', variable: 'SONAR_LOGIN')]) {
+				sh "./gradlew sonarqube -Dsonar.host.url=$SPRING_SONAR_HOST_URL -Dsonar.login=$SONAR_LOGIN --refresh-dependencies --no-daemon"
+			}
+		}
+	}
+},
 ossrh: {
 	stage('OSSRH Deploy') {
 		node {
