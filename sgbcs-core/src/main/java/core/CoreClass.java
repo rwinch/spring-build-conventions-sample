@@ -7,4 +7,7 @@ package core;
  */
 public class CoreClass {
 
+	public void run() {
+
+	}
 }
