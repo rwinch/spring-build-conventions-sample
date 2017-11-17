@@ -1,6 +1,6 @@
 buildscript {
 	dependencies {
-		classpath 'io.spring.gradle:spring-build-conventions:0.0.5.RELEASE'
+		classpath 'io.spring.gradle:spring-build-conventions:0.0.6.BUILD-SNAPSHOT'
 	}
 	repositories {
 		maven { url 'https://repo.spring.io/libs-snapshot' }
